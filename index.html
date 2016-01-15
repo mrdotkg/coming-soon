@@ -506,8 +506,25 @@
         $('form#mail-subscription').submit(function(event){
             event.preventDefault();
             if ($('form#mail-subscription').valid() ) {
-                event.preventDefault();
-                mail($('#reg-email').val(),'Sucsribed to Goyal Brothers','Thanks for subscribing with us.');
+                console.log($('#reg-email').val());
+                //send mail to the user
+                var email=$('#reg-email').val();
+                mail(
+                        email, //to
+                        'Sucsribed to Goyal Brothers', //subject
+                        'Thanks for subscribing with us.', //message
+                        'admin@goyalbrothers.com' //from
+                );
+
+                //send mail to the the admin
+                mail(
+                        'nitin@goyalbrothers.com', //to
+                        'Website test mails',      //subject
+                        'User Subscribed: '+email, //message
+                        'admin@goyalbrothers.com'  //from
+                );
+
+
                 // Hide for if no error
                 $('.invite').addClass('invisible');
                 $('.send_email_form .email_f').addClass('invisible');
